@@ -1,6 +1,8 @@
 
 
+// eslint-disable-next-line react/prop-types
 const BestSalesCard = ({ bestSale }) => {
+    // eslint-disable-next-line react/prop-types
     const { name, image, price } = bestSale;
     return (
         <div>
