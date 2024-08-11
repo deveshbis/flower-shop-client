@@ -1,11 +1,13 @@
+import { NavLink } from "react-router-dom";
 
 
 const Navbar = () => {
     const navLink = <>
-        <li><a>Home</a></li>
-        <li><a>Shop</a></li>
-        <li><a>Blog</a></li>
-        <li><a>About</a></li>
+        <NavLink to='/'><li><a>Home</a></li></NavLink>
+        <NavLink to='/shop'><li><a>Shop</a></li></NavLink>
+        <NavLink to='/blog'><li><a>Blog</a></li></NavLink>
+        <NavLink to='/about'><li><a>About</a></li></NavLink>
+    
     </>
     return (
         <div>
@@ -84,14 +86,14 @@ const Navbar = () => {
                             <ul
                                 tabIndex={0}
                                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                                <li>
+                                {/* <li>
                                     <a className="justify-between">
                                         Profile
                                         <span className="badge">New</span>
                                     </a>
                                 </li>
-                                <li><a>Settings</a></li>
-                                <li><a>Logout</a></li>
+                                <li><a>Settings</a></li> */}
+                                <NavLink to='register'><li>Logout</li></NavLink>
                             </ul>
                         </div>
                     </div>
