@@ -1,12 +1,12 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../Firebase/FirebaseProvider";
 import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
+import SocialLogin from "./SocialLogin";
 
 
 const Login = () => {
 
-    const { signInUser } = useContext(AuthContext)
+    const { signInUser } = useAuth();
 
     const {
         register,
@@ -21,9 +21,9 @@ const Login = () => {
                 console.log(result.user);
 
             })
-            .catch(error =>{
+            .catch(error => {
                 console.log(error);
-                
+
             })
     }
 
@@ -31,7 +31,7 @@ const Login = () => {
         <div>
             <div className="bg-white dark:bg-gray-900">
                 <div className="flex justify-center h-screen">
-                    <div className="hidden bg-cover lg:block lg:w-2/3" style={{ backgroundImage: "url(https://i.ibb.co/fYRFf0F/rose.webp)"}}>
+                    <div className="hidden bg-cover lg:block lg:w-2/3" style={{ backgroundImage: "url(https://i.ibb.co/fYRFf0F/rose.webp)" }}>
                         <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
                             <div>
                                 <h2 className="text-2xl font-bold text-white sm:text-3xl">Meraki UI</h2>
@@ -49,7 +49,7 @@ const Login = () => {
                         <div className="flex-1">
                             <div className="text-center">
                                 <div className="flex justify-center mx-auto">
-                                    <img className="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt=""/>
+                                    <img className="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="" />
                                 </div>
 
                                 <p className="mt-3 text-gray-500 dark:text-gray-300">Sign in to access your account</p>
@@ -59,9 +59,9 @@ const Login = () => {
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div>
                                         <label htmlFor="email" className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email Address</label>
-                                        <input type="email" name="email" id="email" placeholder="example@example.com" 
-                                        {...register("email", { required: true })}
-                                        className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                        <input type="email" name="email" id="email" placeholder="example@example.com"
+                                            {...register("email", { required: true })}
+                                            className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                                         {errors.email && <span className="text-red-600">This field is required</span>}
                                     </div>
 
@@ -71,9 +71,9 @@ const Login = () => {
                                             <a href="#" className="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot password?</a>
                                         </div>
 
-                                        <input type="password" name="password" id="password" placeholder="Your Password" 
-                                        {...register("password", { required: true })}
-                                        className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                        <input type="password" name="password" id="password" placeholder="Your Password"
+                                            {...register("password", { required: true })}
+                                            className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                                         {errors.password && <span className="text-red-600">This field is required</span>}
                                     </div>
 
@@ -87,6 +87,8 @@ const Login = () => {
 
                                 <p className="mt-6 text-sm text-center text-gray-400">Do not have an account yet? <Link to='/register' className="text-blue-500 focus:outline-none focus:underline hover:underline">Sign Up.</Link></p>
                             </div>
+                            <div className="divider divider-success">OR</div>
+                            <SocialLogin/>
                         </div>
                     </div>
                 </div>
