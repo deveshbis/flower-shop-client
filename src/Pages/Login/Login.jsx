@@ -1,7 +1,32 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Firebase/FirebaseProvider";
+import { useForm } from "react-hook-form";
 
 
 const Login = () => {
+
+    const { signInUser } = useContext(AuthContext)
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
+
+    const onSubmit = (data) => {
+        const { email, password } = data;
+        signInUser(email, password)
+            .then(result => {
+                console.log(result.user);
+
+            })
+            .catch(error =>{
+                console.log(error);
+                
+            })
+    }
+
     return (
         <div>
             <div className="bg-white dark:bg-gray-900">
@@ -31,10 +56,13 @@ const Login = () => {
                             </div>
 
                             <div className="mt-8">
-                                <form>
+                                <form onSubmit={handleSubmit(onSubmit)}>
                                     <div>
                                         <label htmlFor="email" className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email Address</label>
-                                        <input type="email" name="email" id="email" placeholder="example@example.com" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                        <input type="email" name="email" id="email" placeholder="example@example.com" 
+                                        {...register("email", { required: true })}
+                                        className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                        {errors.email && <span className="text-red-600">This field is required</span>}
                                     </div>
 
                                     <div className="mt-6">
@@ -43,7 +71,10 @@ const Login = () => {
                                             <a href="#" className="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot password?</a>
                                         </div>
 
-                                        <input type="password" name="password" id="password" placeholder="Your Password" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                        <input type="password" name="password" id="password" placeholder="Your Password" 
+                                        {...register("password", { required: true })}
+                                        className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                        {errors.password && <span className="text-red-600">This field is required</span>}
                                     </div>
 
                                     <div className="mt-6">
